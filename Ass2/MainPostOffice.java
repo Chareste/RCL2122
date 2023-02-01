@@ -7,14 +7,14 @@ import java.util.concurrent.RejectedExecutionException;
 public class MainPostOffice {
     public static void main(String[] args){
         Office office = new Office();
-        BlockingQueue sala = new LinkedBlockingQueue();
+        BlockingQueue<OfficeClient> sala = new LinkedBlockingQueue<>();
 
         int i = 0;
 
         do {
             if (i <= 200) {sala.add(new OfficeClient()); i++;}
 
-            OfficeClient client = (OfficeClient) sala.peek();
+            OfficeClient client = sala.peek();
             try {
                 office.manageClient(client);
                 sala.poll();
