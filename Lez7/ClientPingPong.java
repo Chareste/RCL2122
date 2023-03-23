@@ -20,9 +20,10 @@ public class ClientPingPong {
                     toServer.writeUTF("Ping");
                     Thread.sleep(1000);
                     if(fromServer.readUTF().equals("Pong")){
-                        toServer.flush();
-                        break;
+                        System.out.println("Timeout");
                     }
+                    toServer.flush();
+                    break;
                 } catch (InterruptedException e) {}
             }
         }
