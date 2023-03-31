@@ -17,9 +17,15 @@ import java.net.*;
 import java.time.LocalDateTime;
 
 public class TimeServer{
+    static String DEFAULT_ADDRESS = "239.255.1.3";
+
     public static void main(String[] args) throws IOException{
+        
         int port = 1331;
-        String addressName = "239.255.1.3";
+        String addressName;
+        try{ addressName=args[0];
+        } catch (RuntimeException e){addressName=DEFAULT_ADDRESS;}
+
         try (MulticastSocket ms = new MulticastSocket(port)){
             InetSocketAddress group=new InetSocketAddress(InetAddress.getByName(addressName), port);
             NetworkInterface netIf=NetworkInterface.getByName("wlan1");
